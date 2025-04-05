@@ -1,5 +1,7 @@
 package projectHub.projectHub.Service;
 
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import projectHub.projectHub.Entity.User;
 
 import java.util.List;
@@ -11,4 +13,5 @@ public interface UserService {
     List<User> findAll();
     void deleteById(Integer userId);
     Optional<User> findByEmail(String email);
+    UserDetails loadUserByUsername(String email) throws UsernameNotFoundException;
 }
