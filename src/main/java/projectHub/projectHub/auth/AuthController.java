@@ -27,7 +27,7 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/login")
-    public ResponseEntity<String> login (@RequestBody User request){
+    public ResponseEntity<AuthResponse> login (@RequestBody User request){
         authManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getEmail(),
@@ -35,14 +35,18 @@ public class AuthController {
                 )
         );
         UserDetails user = userService.loadUserByUsername(request.getEmail());
+        /* Cambio 1*/
+        User userInfo = userService.findByEmail(request.getEmail()).orElseThrow(() -> new RuntimeException("User not found"));
         String token = jwtService.generateToken(user);
-        return ResponseEntity.ok(token);
+        return ResponseEntity.ok(new AuthResponse(token, userInfo.getId()));
     }
 
     @PostMapping("/register")
     public ResponseEntity<AuthResponse> register(@RequestBody AuthRequest request) {
       String token = authService.register(request);
-        return ResponseEntity.ok(new AuthResponse(token));
+        /* Cambio 1*/
+      User userInfo = userService.findByEmail(request.getEmail()).orElseThrow(() -> new RuntimeException("User not found"));
+      return ResponseEntity.ok(new AuthResponse(token, userInfo.getId()));
     }
 
 }

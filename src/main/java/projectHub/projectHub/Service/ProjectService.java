@@ -1,5 +1,6 @@
 package projectHub.projectHub.Service;
 
+import org.springframework.data.repository.query.Param;
 import projectHub.projectHub.Entity.Project;
 
 import java.util.List;
@@ -11,4 +12,5 @@ public interface ProjectService {
     List<Project> findAll();
     void deleteById(Integer id);
     List<Project> findByGroupId(Integer groupId);
+    List<Project> findAllByUserId(@Param("userId") Integer userId);
 }

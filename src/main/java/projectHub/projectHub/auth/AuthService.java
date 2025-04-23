@@ -19,9 +19,9 @@ public class AuthService {
 
     public String register(AuthRequest request) {
 
-        if (userService.findByEmail(request.getEmail()).isPresent()) {
-            throw new IllegalArgumentException("Email already in use.");
-        }
+//        if (userService.findByEmail(request.getEmail()).isPresent()) {
+//            throw new IllegalArgumentException("Email already in use.");
+//        }
         User user = new User();
         user.setFirstName(request.getFirstName());
         user.setLastName(request.getLastName());
@@ -29,7 +29,6 @@ public class AuthService {
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setProgram(request.getProgram());
         user.setDescription(request.getDescription());
-
         userService.save(user);
         return jwtService.generateToken(new CustomUserDetails( user));
     }

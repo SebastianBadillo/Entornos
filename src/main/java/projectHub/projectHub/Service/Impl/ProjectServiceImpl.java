@@ -38,4 +38,9 @@ public class ProjectServiceImpl implements ProjectService {
     public List<Project> findByGroupId(Integer groupId) {
         return repository.findByGroupId(groupId);
     }
+
+    @Override
+    public List<Project> findAllByUserId(Integer userId) {
+        return repository.findAllByUserId(userId);
+    }
 }

@@ -18,8 +18,9 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
+    @Column(name="first_name")
     private String firstName;
+    @Column(name="last_name")
     private String lastName;
 
     @Column(unique = true, nullable = false)
@@ -34,8 +35,10 @@ public class User {
     private String description;
 
     @CreationTimestamp
+    @Column(name="created_at")
     private LocalDateTime createdAt;
 
     @UpdateTimestamp
+    @Column(name="updated_at")
     private LocalDateTime updatedAt;
 }
